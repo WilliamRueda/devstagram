@@ -21,7 +21,7 @@
             <h1 class="text-3xl font-black">DesvStagram</h1>
             <nav class="flex gap-2 items-center">
                 <a href="#" class="font-bold uppercase text-gray-600 text-sm">Login</a>
-                <a href="#" class="font-bold uppercase text-gray-600 text-sm">Crear cuenta</a>
+                <a href="crear-cuenta" class="font-bold uppercase text-gray-600 text-sm">Crear cuenta</a>
             </nav>
         </div>
         </header>
@@ -33,8 +33,8 @@
 
         </main>
 
-        <footer class="text-center p-5 text-gray-500 font-bold uppercase">
-            Devstagram - Todos los derechos reservados Mundosoft @php echo date('Y') @endphp
+        <footer class="text-center p-5 text-gray-500 font-bold uppercase mt-10">
+            Devstagram - Todos los derechos reservados Mundosoft{{now()->year}}
         </footer>
         
         </body>
