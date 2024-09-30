@@ -15,6 +15,8 @@
         </style>
   <!-- Asegúrate de que esta línea esté presente -->
   @vite('resources/css/app.css')
+  @vite('resources/css/app.css')
+  
     </head>
     <body class="bg-gray-100">
         <header class="p-5 border-b bg-white shadow">
@@ -29,7 +31,7 @@
                       Crear
                         
                     </a>
-                    <a href="#" class="font-bold uppercase text-gray-600 text-sm">Hola: <span class="font-normal">{{ auth()->user()->username }}</span></a>
+                    <a href="{{route('posts.index',auth()->user()->username)}}" class="font-bold uppercase text-gray-600 text-sm">Hola: <span class="font-normal">{{ auth()->user()->username }}</span></a>
                     <form action="{{ route('logout') }}" method="POST">
                         @csrf
             
@@ -40,7 +42,7 @@
         
                 @guest
                 <nav class="flex gap-2 items-center">
-                    <a href="#" class="font-bold uppercase text-gray-600 text-sm">Login</a>
+                    <a href="{{route('login')}}" class="font-bold uppercase text-gray-600 text-sm">Login</a>
                     <a href="{{ route('register') }}" class="font-bold uppercase text-gray-600 text-sm">Crear cuenta</a>
                 </nav>
                 @endguest
@@ -58,6 +60,6 @@
         <footer class="text-center p-5 text-gray-500 font-bold uppercase mt-10">
             Devstagram - Todos los derechos reservados Mundosoft{{now()->year}}
         </footer>
-        
+        @vite('resources/js/app.js')
         </body>
         </html>
