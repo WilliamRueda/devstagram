@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
@@ -35,6 +36,8 @@ Route::post('/login', [LoginController::class, 'store']);
 Route::post('/logout',[LogoutController::class,'store'])->name('logout');
 
 Route::get('/post/create', [PostController::class, 'create'])->name('posts.create');
+/* ruta para la carga de imagenes */
+Route::post('/imagenes', [ImagenController::class, 'store'])->name('imagenes.store');
 
 /* tener en cuenta de que el orden en las rutas si importa, ya que estas veriofican, si esta ruta esta antes que als demas primero brinca la verificacion */
 Route::get('/{user:username}', [PostController::class, 'index'])->name('posts.index');
