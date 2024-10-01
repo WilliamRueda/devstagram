@@ -15,8 +15,10 @@ class PostController extends Controller
      $this->middleware('auth');    
     }
     public function index(User $user){
+         
+      $posts = Post::where('user_id', $user->id)->get();
     
-      return view('dashboard', ['user' => $user]);
+      return view('dashboard', ['user' => $user, 'posts' => $posts]);
     }
 
   
@@ -40,14 +42,24 @@ class PostController extends Controller
       
       /* OTRA FORMA DE REALIZAR REGISTROS */
 
-      $post = new Post;
+     /*  $post = new Post;
       $post->titulo = $request->titulo;
       $post->description = $request->description;
       $post->image = $request->image;
       $post->user_id = auth()->user()->id;
       $post->save();
+       */
+
+      /* Crear usuario usando la directriz de la relacion */
+
+      $request->user()->posts()->create([
+        'titulo' => $request->titulo,
+        'description' => $request->description,
+        'image' => $request->image,
+        'user_id' => auth()->user()->id
+
+      ]);
       return redirect()->route('posts.index', auth()->user()->username);
-    
     }
 
 
