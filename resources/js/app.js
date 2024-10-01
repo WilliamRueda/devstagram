@@ -11,23 +11,37 @@ document.addEventListener('DOMContentLoaded', function() {
             addRemoveLinks: true,
             dictRemoveFile: 'Eliminar archivo',
             maxFiles: 1,
-            uploadMultiple: false
+            uploadMultiple: false,
+            init: function(){
+                
+                if(document.querySelector('[name="image"]').value.trim()){
+                            const imagenPublicada ={};
+                            imagenPublicada.size= 1234;
+                            imagenPublicada.name = document.querySelector('[name="image"]').value;
+
+                            this.options.addedfile.call(this,imagenPublicada);
+                            this.options.thumbnail.call(this,imagenPublicada,`/uploads/${imagenPublicada.name}`)
+                            imagenPublicada.previewElement.classList.add('dz-success','dz-complete')
+                }
+            }
         });
   
-        dropzone.on('sending', function(file,xhr,formData){
+      /*   dropzone.on('sending', function(file,xhr,formData){
             console.log(file);
-        })
+        }) */
 
         dropzone.on("success", function(file,response){
-            console.log(response)
+            console.log(response.image);
+            document.querySelector('[name="image"]').value = response.image;
         })
 
-        dropzone.on("error", function(file,message){
+    /*     dropzone.on("error", function(file,message){
             console.log(message)
-        })
+        }) */
         
         dropzone.on("removedfile", function(){
-            console.log('archivo eliminado')
+            console.log('archivo eliminado');
+            document.querySelector('[name="image"]').value = "";
         })
   
     } else {

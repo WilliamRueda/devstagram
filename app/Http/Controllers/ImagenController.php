@@ -29,7 +29,7 @@ public function store(Request $request){
     $image->save($imagenPath);
 
     // 7. Retornar una respuesta (opcional, ajusta según lo que necesites).
-    return response()->json(['message' => 'Imagen guardada correctamente', 'path' => $imagenPath]);
+    return response()->json(['message' => 'Imagen guardada correctamente', 'path' => $imagenPath, 'image'=> $nombreImagen ]);
 }
 
 }

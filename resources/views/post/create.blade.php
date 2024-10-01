@@ -18,7 +18,7 @@ Crea una nueva publicacion
         </form>
     </div>
     <div class=" px-10 md:w-1/2 bg-white p-6 rounded-lg shadow-xl mt-10 md:mt-0">
-        <form action="{{route('register')}}" method="POST" novalidate >
+        <form action="{{route('posts.store')}}" method="POST" novalidate >
             @csrf 
             <div class="mb-5">
                 <label for="titulo" class="mb-2 block uppercase text-gray-500 font-bold">Titulo de tu post</label>
@@ -30,16 +30,22 @@ Crea una nueva publicacion
                     @enderror
             </div>
             <div class="mb-5">
-                <label for="descripcion" class="mb-2 block uppercase text-gray-500 font-bold">Descripción de tu post</label>
+                <label for="description" class="mb-2 block uppercase text-gray-500 font-bold">Descripción de tu post</label>
                 <textarea 
-                 id="descripcion"
-                 name="descripcion" 
+                 id="description"
+                 name="description" 
                  placeholder="Drescripcion del Post"
                  class="border p-3 w-full rounded-lg 
                  @error('name') border-red-500  @enderror "
                 
-               >{{old('descripcion')}}</textarea>
-                    @error('descripcion')
+               >{{old('description')}}</textarea>
+                    @error('description')
+                    <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{$message}}</p>
+                    @enderror
+            </div>
+            <div class="mb-5">
+                <input type="hidden" name="image" value="{{old('image')}}">
+                @error('image')
                     <p class="bg-red-500 text-white my-2 rounded-lg text-sm p-2 text-center">{{$message}}</p>
                     @enderror
             </div>
