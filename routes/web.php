@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ComentarioController;
 use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
@@ -39,6 +40,10 @@ Route::get('/post/create', [PostController::class, 'create'])->name('posts.creat
 /* ruta para la carga de imagenes */
 Route::post('/imagenes', [ImagenController::class, 'store'])->name('imagenes.store');
 Route::post('/posts', [PostController::class, 'store'])->name('posts.store');
+
+Route::post('/{user:username}/posts/{post}', [ComentarioController::class, 'store'])->name('comentarios.store');
+/* Elimina post */
+Route::delete('posts/{post}', [PostController::class, 'destroy'])->name('comentarios.destoy');
 /* Ruta para el metodo de mostrar la imagen al dar clic en el post */
 Route::get('/{user:username}/posts/{post}', [PostController::class, 'show'])->name('posts.show');
 /* tener en cuenta de que el orden en las rutas si importa, ya que estas veriofican, si esta ruta esta antes que als demas primero brinca la verificacion */
