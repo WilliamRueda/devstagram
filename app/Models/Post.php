@@ -25,4 +25,10 @@ class Post extends Model
     public function comentarios(){
         return $this->hasMany(Comentario::class); 
      }
+     public function likes(){
+        return $this->hasMany(Like::class); 
+     }
+     public function checkLikes(User $user){
+        return $this->likes->contains('user_id', $user->id); 
+     }
 }
