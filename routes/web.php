@@ -5,6 +5,7 @@ use App\Http\Controllers\ImagenController;
 use App\Http\Controllers\LikeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
+use App\Http\Controllers\PerfilController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\PostController;
 use Illuminate\Auth\Events\Logout;
@@ -28,6 +29,10 @@ Route::get('/', function () {
 Route::get('/register',[RegisterController::class,'index'])->name('register');
 Route::post('/register',[RegisterController::class,'store'])->name('register');
 
+
+/* Rutas para el perfil */
+Route::get('/editar-perfil', [PerfilController::class, 'index'])->name('perfil.index');
+Route::post('{user:username}/editar-perfil', [PerfilController::class, 'store'])->name('perfil.store');
 /* Muro */
 /* Route::get('/muro',[PostController::class,'index'])->name('post.index'); */
 /* lOGIN */
