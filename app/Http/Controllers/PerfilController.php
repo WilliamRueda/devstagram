@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 use Intervention\Image\ImageManager;
 
 class PerfilController extends Controller
@@ -24,6 +25,8 @@ class PerfilController extends Controller
     
       $this->validate($request, [
         'username' => ['required','unique:users,username,' . auth()->user()->id,'min:3','max:20', 'not_in:editar-perfil', ],
+        'email' => ['required', 'unique:users,email,' . auth()->user()->id,'min:8', 'max:30']
+        
       ]);
 
       if($request->imagen){
@@ -45,15 +48,26 @@ class PerfilController extends Controller
     // 6. Guardar la imagen en la ruta especificada.
     $image->save($imagenPath);
       }
+   
+
+      if (Hash::check($request->oldPassword, auth()->user()->password)) {
+        dd("si esta bien la clave");
+       }else{
+       dd($request->email);
+       }
+
+
 
       /* Guardar cambios */
       $usuario = User::find(auth()->user()->id);
       $usuario->username = $request->username;
-      $usuario->image= $nombreImagen ?? '';
+      $usuario->image= $nombreImagen ?? auth()->user()->image ?? null;
 
       $usuario->save();
-
+      
       //Redireccionamos al user
       return redirect()->route('posts.index', $usuario->username);
     }
+
+
 }
